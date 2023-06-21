@@ -1,0 +1,37 @@
+spring:
+  profiles:
+    active: development
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: development
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/DoctorAppointmentApp
+    username: DoctorAppointmentAppAdmin
+    password: ePTgu5CTBA9QkGjBq28z
+  jpa:
+    properties:
+      hibernate:
+        show_sql: 'true'
+    generate-ddl: false
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: production
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/DoctorAppointmentApp
+    username: DoctorAppointmentAppAdmin
+    password: ePTgu5CTBA9QkGjBq28z
+  jpa:
+    properties:
+      hibernate:
+        show_sql: 'false'
+    generate-ddl: false
