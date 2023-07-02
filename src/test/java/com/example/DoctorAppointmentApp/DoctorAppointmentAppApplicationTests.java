@@ -8,6 +8,8 @@ class DoctorAppointmentAppApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
+
 
 }

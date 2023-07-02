@@ -1,10 +1,7 @@
 package com.example.DoctorAppointmentApp.mapper;
 
-import com.example.DoctorAppointmentApp.dto.doctor.DoctorDTO;
-import com.example.DoctorAppointmentApp.dto.patient.EditPatientDTO;
 import com.example.DoctorAppointmentApp.dto.patient.PatientDTO;
 import com.example.DoctorAppointmentApp.dto.patient.RegisterPatientDTO;
-import com.example.DoctorAppointmentApp.model.doctors.Doctor;
 import com.example.DoctorAppointmentApp.model.patients.Patient;
 import org.mapstruct.Mapper;
 

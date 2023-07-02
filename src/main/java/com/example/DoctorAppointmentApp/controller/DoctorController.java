@@ -7,7 +7,6 @@ import com.example.DoctorAppointmentApp.model.doctors.DoctorSpeciality;
 import com.example.DoctorAppointmentApp.service.definition.DoctorService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,29 +22,29 @@ public class DoctorController {
         return doctorService.registerDoctor(registerDoctorDTO);
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public List getAllDoctors(){
         return doctorService.getAllDoctors();
     }
 
     @GetMapping("/{id}")
-    public DoctorDTO getDoctorByID(@PathVariable int id){
+    public DoctorDTO getDoctorByID(@PathVariable long id){
         return doctorService.getDoctorById(id);
     }
 
-    @GetMapping
-    public List<DoctorDTO> getDoctorsBySpeciality(@RequestParam("doctorSpeciality") DoctorSpeciality doctorSpeciality){
+    @GetMapping("/doctor-speciality")
+    public List<DoctorDTO> getDoctorsBySpeciality(DoctorSpeciality doctorSpeciality){
         return doctorService.getDoctorsBySpeciality(doctorSpeciality);
     }
 
 
     @DeleteMapping
-    public void deleteDoctorById(int id){
+    public void deleteDoctorById(long id){
         doctorService.deleteDoctorById(id);
     }
 
     @PutMapping
-    public DoctorDTO editDoctor(int id, @Valid @RequestBody EditDoctorDTO editDoctorDTO){
+    public DoctorDTO editDoctor(long id, @Valid @RequestBody EditDoctorDTO editDoctorDTO){
         return doctorService.editDoctor(id, editDoctorDTO);
     }
 }

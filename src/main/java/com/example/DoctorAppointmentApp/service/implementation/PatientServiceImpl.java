@@ -7,9 +7,9 @@ import com.example.DoctorAppointmentApp.mapper.PatientMapper;
 import com.example.DoctorAppointmentApp.model.patients.Patient;
 import com.example.DoctorAppointmentApp.repository.PatientRepository;
 import com.example.DoctorAppointmentApp.service.definition.PatientService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class PatientServiceImpl implements PatientService {
     private final PatientMapper patientMapper;
     private final PatientRepository patientRepository;
 
-
+    @Transactional
     @Override
     public PatientDTO registerPatient(RegisterPatientDTO patient) {
         Patient patientToRegister = patientMapper.mapPatientDTOToPatient(patient);
@@ -31,7 +31,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public List<PatientDTO> getAllPatients() {
         return patientMapper.mapPatientsToPatientsDTO(
-                (List<Patient>) patientRepository.findAll());
+                 patientRepository.findAll());
     }
 
     @Override
@@ -42,16 +42,17 @@ public class PatientServiceImpl implements PatientService {
                                 findById(id).
                                 orElseThrow());
     }
-    
 
+    @Transactional
     @Override
-    public void deletePatientById(int id) {
+    public void deletePatientById(long id) {
         Patient Patient = patientRepository.findById(id).orElseThrow();
         patientRepository.delete(Patient);
     }
 
+    @Transactional
     @Override
-    public PatientDTO editPatient(int id, EditPatientDTO patient) {
+    public PatientDTO editPatient(long id, EditPatientDTO patient) {
         Patient patientToEdit = patientRepository.findById(id).orElseThrow();
 
         patientToEdit.setFirstName(patient.getFirstName());
@@ -60,7 +61,7 @@ public class PatientServiceImpl implements PatientService {
         patientToEdit.setAge(patient.getAge());
 
         Patient editedPatient = patientRepository.save(patientToEdit);
-        PatientDTO editedPatientDTO = patientMapper.mapPatientToPatientDTO(patientToEdit);
+        PatientDTO editedPatientDTO = patientMapper.mapPatientToPatientDTO(editedPatient);
         return editedPatientDTO;
     }
 }

@@ -1,12 +1,8 @@
 package com.example.DoctorAppointmentApp.controller;
 
-import com.example.DoctorAppointmentApp.dto.doctor.DoctorDTO;
-import com.example.DoctorAppointmentApp.dto.doctor.EditDoctorDTO;
-import com.example.DoctorAppointmentApp.dto.doctor.RegisterDoctorDTO;
 import com.example.DoctorAppointmentApp.dto.patient.EditPatientDTO;
 import com.example.DoctorAppointmentApp.dto.patient.PatientDTO;
 import com.example.DoctorAppointmentApp.dto.patient.RegisterPatientDTO;
-import com.example.DoctorAppointmentApp.model.doctors.DoctorSpeciality;
 import com.example.DoctorAppointmentApp.service.definition.PatientService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -26,24 +22,24 @@ public class PatientController {
         return patientService.registerPatient(registerPatientDTO);
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public List getAllPatients(){
         return patientService.getAllPatients();
     }
 
     @GetMapping("/{id}")
-    public PatientDTO getPatientByID(@PathVariable int id){
+    public PatientDTO getPatientByID(@PathVariable long id){
         return patientService.getPatientById(id);
     }
 
 
     @DeleteMapping
-    public void deletePatientById(int id){
+    public void deletePatientById(long id){
         patientService.deletePatientById(id);
     }
 
     @PutMapping
-    public PatientDTO editPatient(int id, @Valid @RequestBody EditPatientDTO editPatientDTO){
+    public PatientDTO editPatient(long id, @Valid @RequestBody EditPatientDTO editPatientDTO){
         return patientService.editPatient(id, editPatientDTO);
     }
     

@@ -8,10 +8,9 @@ import com.example.DoctorAppointmentApp.model.doctors.Doctor;
 import com.example.DoctorAppointmentApp.model.doctors.DoctorSpeciality;
 import com.example.DoctorAppointmentApp.repository.DoctorRepository;
 import com.example.DoctorAppointmentApp.service.definition.DoctorService;
-import lombok.AllArgsConstructor;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class DoctorServiceImpl implements DoctorService {
     private final DoctorMapper doctorMapper;
     private final DoctorRepository doctorRepository;
 
-
+    @Transactional
     @Override
     public DoctorDTO registerDoctor(RegisterDoctorDTO doctor) {
         Doctor doctorToRegister = doctorMapper.mapDoctorDTOToDoctor(doctor);
@@ -40,7 +39,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public DoctorDTO getDoctorById(int id) {
+    public DoctorDTO getDoctorById(long id) {
         return doctorMapper.
                 mapDoctorToDoctorDTO(
                         doctorRepository.
@@ -53,14 +52,16 @@ public class DoctorServiceImpl implements DoctorService {
         return doctorMapper.mapDoctorsToDoctorsDTO(doctorRepository.findAllByDoctorSpeciality(doctorSpeciality));
     }
 
+    @Transactional
     @Override
-    public void deleteDoctorById(int id) {
+    public void deleteDoctorById(long id) {
         Doctor doctor = doctorRepository.findById(id).orElseThrow();
         doctorRepository.delete(doctor);
     }
 
+    @Transactional
     @Override
-    public DoctorDTO editDoctor(int id, EditDoctorDTO doctor) {
+    public DoctorDTO editDoctor(long id, EditDoctorDTO doctor) {
         Doctor doctorToEdit = doctorRepository.findById(id).orElseThrow();
 
         doctorToEdit.setFirstName(doctor.getFirstName());
@@ -68,7 +69,7 @@ public class DoctorServiceImpl implements DoctorService {
         doctorToEdit.setDoctorSpeciality(doctor.getDoctorSpeciality());
 
         Doctor editedDoctor = doctorRepository.save(doctorToEdit);
-        DoctorDTO editedDoctorDTO = doctorMapper.mapDoctorToDoctorDTO(doctorToEdit);
+        DoctorDTO editedDoctorDTO = doctorMapper.mapDoctorToDoctorDTO(editedDoctor);
         return editedDoctorDTO;
     }
 }
