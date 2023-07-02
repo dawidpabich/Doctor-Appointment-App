@@ -34,17 +34,12 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<DoctorDTO> getAllDoctors() {
-        return doctorMapper.mapDoctorsToDoctorsDTO(
-                (List<Doctor>) doctorRepository.findAll());
+        return doctorMapper.mapDoctorsToDoctorsDTO(doctorRepository.findAll());
     }
 
     @Override
     public DoctorDTO getDoctorById(long id) {
-        return doctorMapper.
-                mapDoctorToDoctorDTO(
-                        doctorRepository.
-                                findById(id).
-                                orElseThrow());
+        return doctorMapper.mapDoctorToDoctorDTO(doctorRepository.findById(id).orElseThrow());
     }
 
     @Override
@@ -69,7 +64,6 @@ public class DoctorServiceImpl implements DoctorService {
         doctorToEdit.setDoctorSpeciality(doctor.getDoctorSpeciality());
 
         Doctor editedDoctor = doctorRepository.save(doctorToEdit);
-        DoctorDTO editedDoctorDTO = doctorMapper.mapDoctorToDoctorDTO(editedDoctor);
-        return editedDoctorDTO;
+        return doctorMapper.mapDoctorToDoctorDTO(editedDoctor);
     }
 }

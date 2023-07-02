@@ -58,11 +58,19 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public AppointmentDTO getAppointmentById(long id) {
-        return appointmentMapper.
-                mapAppointmentToAppointmentDTO(
-                        appointmentRepository.
-                                findById(id).
-                                orElseThrow());
+        return appointmentMapper.mapAppointmentToAppointmentDTO(appointmentRepository.findById(id).orElseThrow());
+    }
+
+    @Override
+    public List<AppointmentDTO> getAppointmentByDoctorId(long doctorId){
+        List<Appointment> doctorAppointments = appointmentRepository.findAppointmentsByDoctor_Id(doctorId);
+        return appointmentMapper.mapAppointmentsToAppointmentsDTO(doctorAppointments);
+    }
+
+    @Override
+    public List<AppointmentDTO> getAppointmentByPatientId(long patientId){
+        List<Appointment> patientAppointments = appointmentRepository.findAppointmentsByPatient_Id(patientId);
+        return appointmentMapper.mapAppointmentsToAppointmentsDTO(patientAppointments);
     }
 
 
@@ -80,8 +88,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentToEdit.setAppointmentDate(appointment.getAppointmentDate());
 
         Appointment editedAppointment = appointmentRepository.save(appointmentToEdit);
-        AppointmentDTO editedAppointmentDTO = appointmentMapper.mapAppointmentToAppointmentDTO(editedAppointment);
-        return editedAppointmentDTO;
+        return appointmentMapper.mapAppointmentToAppointmentDTO(editedAppointment);
     }
 
 

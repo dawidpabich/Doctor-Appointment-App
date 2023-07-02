@@ -33,8 +33,8 @@ public class PatientController {
     }
 
 
-    @DeleteMapping
-    public void deletePatientById(long id){
+    @DeleteMapping("/{id}")
+    public void deletePatientById(@PathVariable long id){
         patientService.deletePatientById(id);
     }
 

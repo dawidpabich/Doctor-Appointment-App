@@ -33,9 +33,19 @@ public class AppointmentController {
         return appointmentService.getAppointmentById(id);
     }
 
+    @GetMapping(params = "doctorId")
+    public List getAppointmentsByDoctorId(@RequestParam long doctorId){
+        return appointmentService.getAppointmentByDoctorId(doctorId);
+    }
 
-    @DeleteMapping
-    public void deleteAppointmentById(long id){
+    @GetMapping(params = "patientId")
+    public List getAppointmentsByPatientId(@RequestParam long patientId){
+        return appointmentService.getAppointmentByPatientId(patientId);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public void deleteAppointmentById(@PathVariable long id){
         appointmentService.deleteAppointmentById(id);
     }
 

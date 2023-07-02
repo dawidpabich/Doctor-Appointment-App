@@ -43,6 +43,8 @@ public class PatientServiceImpl implements PatientService {
                                 orElseThrow());
     }
 
+
+
     @Transactional
     @Override
     public void deletePatientById(long id) {
@@ -61,7 +63,6 @@ public class PatientServiceImpl implements PatientService {
         patientToEdit.setAge(patient.getAge());
 
         Patient editedPatient = patientRepository.save(patientToEdit);
-        PatientDTO editedPatientDTO = patientMapper.mapPatientToPatientDTO(editedPatient);
-        return editedPatientDTO;
+        return patientMapper.mapPatientToPatientDTO(editedPatient);
     }
 }

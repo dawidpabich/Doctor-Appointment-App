@@ -9,9 +9,12 @@ import java.util.List;
 public interface AppointmentService {
 
     AppointmentDTO registerAppointment(RegisterAppointmentDTO appointment);
-
     List<AppointmentDTO> getAllAppointments();
     AppointmentDTO getAppointmentById(long id);
+    List<AppointmentDTO> getAppointmentByDoctorId(long doctorID);
+
+    List<AppointmentDTO> getAppointmentByPatientId(long patientId);
+
     void deleteAppointmentById(long id);
     AppointmentDTO editAppointment(long id, EditAppointmentDTO appointment);
 }
