@@ -49,8 +49,8 @@ public class AppointmentController {
         appointmentService.deleteAppointmentById(id);
     }
 
-    @PutMapping
-    public AppointmentDTO editAppointment(long id, @Valid @RequestBody EditAppointmentDTO editAppointmentDTO){
+    @PutMapping("/{id}")
+    public AppointmentDTO editAppointment(@PathVariable long id, @Valid @RequestBody EditAppointmentDTO editAppointmentDTO){
         return appointmentService.editAppointment(id, editAppointmentDTO);
     }
 }

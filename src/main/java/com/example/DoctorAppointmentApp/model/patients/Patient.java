@@ -34,7 +34,7 @@ public class Patient {
     private int age;
 
     @Column(name="phone_number")
-    private String phone_number;
+    private String phoneNumber;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments = new ArrayList<>();

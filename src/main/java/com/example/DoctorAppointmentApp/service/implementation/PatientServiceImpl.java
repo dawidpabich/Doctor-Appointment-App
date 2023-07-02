@@ -61,7 +61,7 @@ public class PatientServiceImpl implements PatientService {
 
         patientToEdit.setFirstName(patient.getFirstName());
         patientToEdit.setLastName(patient.getLastName());
-        patientToEdit.setPhone_number(patient.getPhoneNumber());
+        patientToEdit.setPhoneNumber(patient.getPhoneNumber());
         patientToEdit.setAge(patient.getAge());
 
         Patient editedPatient = patientRepository.save(patientToEdit);

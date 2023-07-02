@@ -38,8 +38,8 @@ public class PatientController {
         patientService.deletePatientById(id);
     }
 
-    @PutMapping
-    public PatientDTO editPatient(long id, @Valid @RequestBody EditPatientDTO editPatientDTO){
+    @PutMapping("/{id}")
+    public PatientDTO editPatient(@PathVariable long id, @Valid @RequestBody EditPatientDTO editPatientDTO){
         return patientService.editPatient(id, editPatientDTO);
     }
     
