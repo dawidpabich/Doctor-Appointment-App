@@ -3,6 +3,7 @@ package com.example.DoctorAppointmentApp.service.implementation;
 import com.example.DoctorAppointmentApp.dto.doctor.DoctorDTO;
 import com.example.DoctorAppointmentApp.dto.doctor.EditDoctorDTO;
 import com.example.DoctorAppointmentApp.dto.doctor.RegisterDoctorDTO;
+import com.example.DoctorAppointmentApp.exception.doctor.DoctorNotFoundException;
 import com.example.DoctorAppointmentApp.mapper.DoctorMapper;
 import com.example.DoctorAppointmentApp.model.doctors.Doctor;
 import com.example.DoctorAppointmentApp.model.doctors.DoctorSpeciality;
@@ -39,7 +40,8 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public DoctorDTO getDoctorById(long id) {
-        return doctorMapper.mapDoctorToDoctorDTO(doctorRepository.findById(id).orElseThrow());
+        return doctorMapper.mapDoctorToDoctorDTO(doctorRepository.findById(id).
+                orElseThrow(DoctorNotFoundException::new));
     }
 
     @Override
@@ -50,14 +52,16 @@ public class DoctorServiceImpl implements DoctorService {
     @Transactional
     @Override
     public void deleteDoctorById(long id) {
-        Doctor doctor = doctorRepository.findById(id).orElseThrow();
+        Doctor doctor = doctorRepository.findById(id).
+                orElseThrow(DoctorNotFoundException::new);
         doctorRepository.delete(doctor);
     }
 
     @Transactional
     @Override
     public DoctorDTO editDoctor(long id, EditDoctorDTO doctor) {
-        Doctor doctorToEdit = doctorRepository.findById(id).orElseThrow();
+        Doctor doctorToEdit = doctorRepository.findById(id).
+                orElseThrow(DoctorNotFoundException::new);
 
         doctorToEdit.setFirstName(doctor.getFirstName());
         doctorToEdit.setLastName(doctor.getLastName());

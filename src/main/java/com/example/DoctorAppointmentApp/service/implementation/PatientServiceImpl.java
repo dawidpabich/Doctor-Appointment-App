@@ -3,6 +3,7 @@ package com.example.DoctorAppointmentApp.service.implementation;
 import com.example.DoctorAppointmentApp.dto.patient.EditPatientDTO;
 import com.example.DoctorAppointmentApp.dto.patient.PatientDTO;
 import com.example.DoctorAppointmentApp.dto.patient.RegisterPatientDTO;
+import com.example.DoctorAppointmentApp.exception.patient.PatientNotFoundException;
 import com.example.DoctorAppointmentApp.mapper.PatientMapper;
 import com.example.DoctorAppointmentApp.model.patients.Patient;
 import com.example.DoctorAppointmentApp.repository.PatientRepository;
@@ -44,18 +45,19 @@ public class PatientServiceImpl implements PatientService {
     }
 
 
-
     @Transactional
     @Override
     public void deletePatientById(long id) {
-        Patient Patient = patientRepository.findById(id).orElseThrow();
+        Patient Patient = patientRepository.findById(id).
+                orElseThrow(PatientNotFoundException::new);
         patientRepository.delete(Patient);
     }
 
     @Transactional
     @Override
     public PatientDTO editPatient(long id, EditPatientDTO patient) {
-        Patient patientToEdit = patientRepository.findById(id).orElseThrow();
+        Patient patientToEdit = patientRepository.findById(id).
+                orElseThrow(PatientNotFoundException::new);
 
         patientToEdit.setFirstName(patient.getFirstName());
         patientToEdit.setLastName(patient.getLastName());

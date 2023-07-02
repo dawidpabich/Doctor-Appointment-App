@@ -3,6 +3,7 @@ package com.example.DoctorAppointmentApp.service.implementation;
 import com.example.DoctorAppointmentApp.dto.Appointment.AppointmentDTO;
 import com.example.DoctorAppointmentApp.dto.Appointment.EditAppointmentDTO;
 import com.example.DoctorAppointmentApp.dto.Appointment.RegisterAppointmentDTO;
+import com.example.DoctorAppointmentApp.exception.appointment.AppointmentNotFoundException;
 import com.example.DoctorAppointmentApp.exception.doctor.DoctorNotFoundException;
 import com.example.DoctorAppointmentApp.exception.patient.PatientNotFoundException;
 import com.example.DoctorAppointmentApp.mapper.AppointmentMapper;
@@ -37,8 +38,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDTO registerAppointment(RegisterAppointmentDTO appointment) {
         Appointment appointmentToRegister = appointmentMapper.mapAppointmentDTOToAppointment(appointment);
 
-        Doctor doctor = doctorRepository.findById(appointment.getDoctorID()).orElseThrow(DoctorNotFoundException::new);
-        Patient patient = patientRepository.findById(appointment.getPatientID()).orElseThrow(PatientNotFoundException::new);
+        Doctor doctor = doctorRepository.findById(appointment.getDoctorID()).
+                orElseThrow(DoctorNotFoundException::new);
+        Patient patient = patientRepository.findById(appointment.getPatientID()).
+                orElseThrow(PatientNotFoundException::new);
 
         appointmentToRegister.setDoctor(doctor);
         appointmentToRegister.setPatient(patient);
@@ -58,7 +61,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public AppointmentDTO getAppointmentById(long id) {
-        return appointmentMapper.mapAppointmentToAppointmentDTO(appointmentRepository.findById(id).orElseThrow());
+        return appointmentMapper.mapAppointmentToAppointmentDTO(appointmentRepository.findById(id).
+                orElseThrow(AppointmentNotFoundException::new));
     }
 
     @Override
@@ -77,13 +81,15 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Transactional
     @Override
     public void deleteAppointmentById(long id) {
-        Appointment appointment = appointmentRepository.findById(id).orElseThrow();
+        Appointment appointment = appointmentRepository.findById(id).
+                orElseThrow(AppointmentNotFoundException::new);
         appointmentRepository.delete(appointment);
     }
     @Transactional
     @Override
     public AppointmentDTO editAppointment(long id, EditAppointmentDTO appointment) {
-        Appointment appointmentToEdit = appointmentRepository.findById(id).orElseThrow();
+        Appointment appointmentToEdit = appointmentRepository.findById(id).
+                orElseThrow(AppointmentNotFoundException::new);
 
         appointmentToEdit.setAppointmentDate(appointment.getAppointmentDate());
 
