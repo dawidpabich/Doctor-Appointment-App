@@ -4,7 +4,7 @@ import com.example.DoctorAppointmentApp.dto.doctor.DoctorDTO;
 import com.example.DoctorAppointmentApp.dto.doctor.EditDoctorDTO;
 import com.example.DoctorAppointmentApp.dto.doctor.RegisterDoctorDTO;
 import com.example.DoctorAppointmentApp.model.doctors.DoctorSpeciality;
-import com.example.DoctorAppointmentApp.service.definition.DoctorService;
+import com.example.DoctorAppointmentApp.service.DoctorService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class DoctorController {
     }
 
     @GetMapping
-    public List getAllDoctors(){
+    public List<DoctorDTO> getAllDoctors(){
         return doctorService.getAllDoctors();
     }
 
@@ -32,8 +32,8 @@ public class DoctorController {
         return doctorService.getDoctorById(id);
     }
 
-    @GetMapping("/doctor-speciality")
-    public List<DoctorDTO> getDoctorsBySpeciality(DoctorSpeciality doctorSpeciality){
+    @GetMapping(value = "/doctor-speciality", params = "doctorSpeciality")
+    public List<DoctorDTO> getDoctorsBySpeciality(@RequestParam DoctorSpeciality doctorSpeciality){
         return doctorService.getDoctorsBySpeciality(doctorSpeciality);
     }
 

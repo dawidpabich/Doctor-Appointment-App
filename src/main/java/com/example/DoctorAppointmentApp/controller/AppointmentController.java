@@ -3,7 +3,7 @@ package com.example.DoctorAppointmentApp.controller;
 import com.example.DoctorAppointmentApp.dto.Appointment.AppointmentDTO;
 import com.example.DoctorAppointmentApp.dto.Appointment.EditAppointmentDTO;
 import com.example.DoctorAppointmentApp.dto.Appointment.RegisterAppointmentDTO;
-import com.example.DoctorAppointmentApp.service.definition.AppointmentService;
+import com.example.DoctorAppointmentApp.service.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

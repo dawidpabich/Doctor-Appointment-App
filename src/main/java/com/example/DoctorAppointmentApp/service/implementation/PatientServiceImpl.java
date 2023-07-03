@@ -7,7 +7,7 @@ import com.example.DoctorAppointmentApp.exception.patient.PatientNotFoundExcepti
 import com.example.DoctorAppointmentApp.mapper.PatientMapper;
 import com.example.DoctorAppointmentApp.model.patients.Patient;
 import com.example.DoctorAppointmentApp.repository.PatientRepository;
-import com.example.DoctorAppointmentApp.service.definition.PatientService;
+import com.example.DoctorAppointmentApp.service.PatientService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

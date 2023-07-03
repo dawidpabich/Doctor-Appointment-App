@@ -8,7 +8,7 @@ import com.example.DoctorAppointmentApp.mapper.DoctorMapper;
 import com.example.DoctorAppointmentApp.model.doctors.Doctor;
 import com.example.DoctorAppointmentApp.model.doctors.DoctorSpeciality;
 import com.example.DoctorAppointmentApp.repository.DoctorRepository;
-import com.example.DoctorAppointmentApp.service.definition.DoctorService;
+import com.example.DoctorAppointmentApp.service.DoctorService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

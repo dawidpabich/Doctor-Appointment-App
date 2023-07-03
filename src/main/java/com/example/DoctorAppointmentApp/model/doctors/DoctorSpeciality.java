@@ -5,5 +5,6 @@ public enum DoctorSpeciality {
     FAMILY_MEDICINE,
     DERMATOLOGY,
     NEUROLOGY,
-    ALLERGOLOGIST
+    ALLERGOLOGIST;
+
 }

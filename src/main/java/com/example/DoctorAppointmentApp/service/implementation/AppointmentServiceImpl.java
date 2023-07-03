@@ -13,7 +13,7 @@ import com.example.DoctorAppointmentApp.model.patients.Patient;
 import com.example.DoctorAppointmentApp.repository.AppointmentRepository;
 import com.example.DoctorAppointmentApp.repository.DoctorRepository;
 import com.example.DoctorAppointmentApp.repository.PatientRepository;
-import com.example.DoctorAppointmentApp.service.definition.AppointmentService;
+import com.example.DoctorAppointmentApp.service.AppointmentService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

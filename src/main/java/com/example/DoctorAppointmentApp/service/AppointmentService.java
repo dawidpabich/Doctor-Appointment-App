@@ -1,4 +1,4 @@
-package com.example.DoctorAppointmentApp.service.definition;
+package com.example.DoctorAppointmentApp.service;
 
 import com.example.DoctorAppointmentApp.dto.Appointment.AppointmentDTO;
 import com.example.DoctorAppointmentApp.dto.Appointment.EditAppointmentDTO;
