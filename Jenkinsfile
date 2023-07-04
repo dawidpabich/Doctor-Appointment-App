@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'maven:3.8.4-openjdk-11'
+      args '-v /var/run/docker.sock:/var/run/docker.sock'
+    }
+  }
   
   stages {
     stage('Download repository') {
@@ -11,13 +16,13 @@ pipeline {
 
     stage('Build and Test') {
       steps {
-        sh 'docker run --rm -v $PWD:/app -w /app maven:3.8.4-openjdk-11 mvn clean test'
+        sh 'mvn clean test'
       }
     }
     
     stage('Package') {
       steps {
-        sh 'docker run --rm -v $PWD:/app -w /app maven:3.8.4-openjdk-11 mvn package'
+        sh 'mvn package'
       }
     }
     
