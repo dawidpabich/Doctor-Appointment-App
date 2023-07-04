@@ -2,6 +2,13 @@ pipeline {
   agent any
   
   stages {
+    
+    stage('Download repository') {
+            steps {
+                git branch: 'main',
+                url: 'https://github.com/dawidpabich/Doctor-Appointment-App.git'
+            }
+        }
     stage('Checkout') {
       steps {
         git 'https://github.com/dawidpabich/Doctor-Appointment-App.git'
